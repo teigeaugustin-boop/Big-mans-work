@@ -4,24 +4,49 @@
 #
 # The brief is in PROJECT.md.
 from src import menu
+from src import data
 
 
 def run_game():
+    print("\n" + "=" * 35)
+    print("       WELCOME TO THE GAME!")
+    print("=" * 35)
+
     while True:
         print("\nMENU")
-        print("1. Play Round")
-        print("2. View Stats")
-        print("3. Exit")
-        choice = menu.game_menu()
-        if choice == "1":
-            winner = menu.rock_paper_scissors()
-            print(f"\nPLAYER {winner} WINS!")
-            print("Congratulations! You've earned the right to pick a quiz topic!")
-            print("\nNow choose your quiz topic!")
+        print("1. Start Quiz")
+        print("2. View High Scores")
+        print("3. Play Rock Paper Scissors")
+        print("4. Exit")
 
-        if choice == "3":
+        choice = menu.game_menu()
+
+        if choice == "1":
+            menu.quiz_game()
+
+        elif choice == "2":
+            menu.view_high_scores()
+
+        elif choice == "3":
+            while True:
+                print("\nMENU")
+                print("1. Play Round")
+                print("2. View Stats")
+                print("3. Exit")
+
+                play = menu.rock_game_menu()
+
+                if play == "1":
+                    data.quiz = False
+                    menu.rock_paper_scissors()
+                elif play == "2":
+                    continue
+                elif play == "3":
+                    break
+
+        elif choice == "4":
+            print("\nThanks for playing! Goodbye!")
             break
-    return choice
 
 
 if __name__ == "__main__":

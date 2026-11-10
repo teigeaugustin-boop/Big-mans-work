@@ -18,10 +18,19 @@ def test_rock_paper_scissors():
         assert menu.rock_paper_scissors() == 2
 
 
+def test_rock_game_menu():
+    for choice in ["1", "2", "3"]:
+        with patch("builtins.input", return_value=choice):
+            assert menu.rock_game_menu() == choice
+
+    with patch("builtins.input", side_effect=["invalid", "1"]):
+        assert menu.rock_game_menu() == "1"
+
+
 def test_game_menu():
-    with patch("builtins.input", side_effect=["1"]):
+    for choice in ["1", "2", "3", "4"]:
+        with patch("builtins.input", return_value=choice):
+            assert menu.game_menu() == choice
+
+    with patch("builtins.input", side_effect=["invalid", "1"]):
         assert menu.game_menu() == "1"
-    with patch("builtins.input", side_effect=["2"]):
-        assert menu.game_menu() == "2"
-    with patch("builtins.input", side_effect=["3"]):
-        assert menu.game_menu() == "3"
